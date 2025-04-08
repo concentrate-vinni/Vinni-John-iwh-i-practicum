@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+  body
+    h1 Add a New Building
+
+    form(method="POST", action="/update-cobj")
+      label(for="name") Name:
+      input(type="text", name="name", required)
+      br
+
+      label(for="type") Type:
+      input(type="text", name="type", required)
+      br
+
+      label(for="description") Description:
+      textarea(name="description", rows="4", cols="40")
+      br
+
+      button(type="submit") Submit
+
+    br
+    a(href="/") Return to the homepage
