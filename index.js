@@ -12,7 +12,22 @@ const PRIVATE_APP_ACCESS = 'pat-ap1-24c775bd-69f2-4515-948d-d3bd24899930';
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
-// * Code for Route 1 goes here
+app.get('/', async (req, res) => {
+    const url = 'https://api.hubapi.com/crm/v3/objects/2-182035909?properties=name,type,description';
+    const headers = {
+      Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+      'Content-Type': 'application/json'
+    };
+  
+    try {
+      const response = await axios.get(url, { headers });
+      const data = response.data.results;
+      res.render('homepage', { title: 'Buildings Table | HubSpot Custom Object', data });
+    } catch (error) {
+      console.error(error.response?.data || error.message);
+      res.status(500).send('Error when loading data.');
+    }
+  });
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
